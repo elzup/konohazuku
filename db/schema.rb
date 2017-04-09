@@ -13,8 +13,10 @@
 ActiveRecord::Schema.define(version: 20170409115703) do
 
   create_table "approvals", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "article_id"
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.boolean  "is_approved"
+    t.datetime "approved_at"
     t.index ["article_id"], name: "index_approvals_on_article_id"
     t.index ["user_id"], name: "index_approvals_on_user_id"
   end
