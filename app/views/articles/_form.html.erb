@@ -1,9 +1,15 @@
 <div class="container">
-
   <%= simple_form_for(article, html: {class: 'form-horizontal'}) do |f| %>
       <%= f.input :title, :label => 'タイトル' %>
       <%= f.input :message, :label => '詳細分' %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.input :email_lines, :label => '対象者指定', as: :text, :input_html => { :rows => 10 } %>
+        </div>
+        <div class="col-sm-6">
+          <% # detected user list %>
+        </div>
+      </div>
       <%= f.button :submit %>
-
   <% end %>
 </div>
