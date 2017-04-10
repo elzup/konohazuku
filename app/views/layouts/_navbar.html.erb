@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="user-info pull-right">
+      <% if user %>
+          <%= user.name %>
+      <% else %>
+          <%= link_to "Google アカウントでログイン", user_google_oauth2_omniauth_authorize_path %>
+      <% end %>
+    </div>
+  </div>
+</div>

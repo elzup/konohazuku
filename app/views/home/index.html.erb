@@ -1,1 +1,26 @@
-Home
+<%= render 'layouts/navbar', user: @user %>
+<div class="container">
+  <h1>Readall</h1>
+
+  <h2>作成した記事一覧</h2>
+  <ul class="list-group">
+    <% @user.created_articles.each do |article| %>
+        <%= link_to article do %>
+            <li class="list-group-item">
+              <%= article.title %>
+            </li>
+        <% end %>
+    <% end %>
+  </ul>
+
+  <h2>対象記事一覧</h2>
+  <ul class="list-group">
+    <% @user.assigned_articles.each do |article| %>
+        <%= link_to article do %>
+            <li class="list-group-item">
+              <%= article.title %>
+            </li>
+        <% end %>
+    <% end %>
+  </ul>
+</div>
