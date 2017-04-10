@@ -26,10 +26,11 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = current_user.articles.new(article_params)
+    @article = current_user.created_articles.build(article_params)
+    users = permitted_emails.map { |email| User.find_or_create_by({email: email}) }
 
     respond_to do |format|
-      if @article.save
+      if @article.save && @article.assigned_users = users
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
@@ -42,8 +43,9 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    users = permitted_emails.map { |email| User.find_or_create_by({email: email}) }
     respond_to do |format|
-      if @article.update(article_params)
+      if @article.update(article_params) && @article.assigned_users = users
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
@@ -79,8 +81,8 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :message)
   end
 
-  def article_email_params
-    params.permit(:email_lines)
+  def permitted_emails
+    params.require(:article).permit(:email_lines)[:email_lines].lines.map(&:chomp).compact.reject(&:empty?)
   end
 
 end
