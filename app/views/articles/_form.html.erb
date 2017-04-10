@@ -1,7 +1,9 @@
-<%= simple_form_for(article, html: {class: 'form-horizontal'}) do |f| %>
-    <%= f.input :title %>
-    <%= f.input :message %>
-    <%= f.input :email_list, as: :text %>
-    <%= f.button :submit %>
+<div class="container">
 
-<% end %>
+  <%= simple_form_for(article, html: {class: 'form-horizontal'}) do |f| %>
+      <%= f.input :title %>
+      <%= f.input :message %>
+      <%= f.button :submit %>
+
+  <% end %>
+</div>
