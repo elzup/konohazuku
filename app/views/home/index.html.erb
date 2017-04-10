@@ -5,22 +5,25 @@
   <h2>作成した記事一覧</h2>
   <ul class="list-group">
     <% @user.created_articles.each do |article| %>
-        <%= link_to article do %>
-            <li class="list-group-item">
+        <li class="list-group-item">
+          <%= link_to article do %>
               <%= article.title %>
-            </li>
-        <% end %>
+          <% end %>
+          <%= link_to edit_article_path(article) do %>
+              <%= fa_icon "pencil-square-o" %>
+          <% end %>
+        </li>
     <% end %>
   </ul>
 
   <h2>対象記事一覧</h2>
   <ul class="list-group">
     <% @user.assigned_articles.each do |article| %>
-        <%= link_to article do %>
-            <li class="list-group-item">
+        <li class="list-group-item">
+          <%= link_to article do %>
               <%= article.title %>
-            </li>
-        <% end %>
+          <% end %>
+        </li>
     <% end %>
   </ul>
 </div>
