@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
+  <h1>記事詳細</h1>
   <div class="page-header">
     <p>
       <h1>
@@ -9,12 +10,22 @@
     </p>
   </div>
     <p>
-      <h4>
         <strong>作成者:</strong>
+      <h4>
         <%= @article.author.name %>
       </h4>
     </p>
+        <strong>アサインユーザ一覧:</strong>
+        <p>
+        <h4>
+          <% @article.assigned_users.each do |assigned_user|%>
+              <%= assigned_user.name%>
+          <%end%>
+        </h4>
+        </p>
+    <p>
       <strong>詳細:</strong>
+    </p>
     <p class="lead">
       <%= @article.message %>
     </p>
