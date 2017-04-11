@@ -4,38 +4,51 @@
   <h1>記事詳細</h1>
   <div class="page-header">
     <p>
-      <h1>
+    <h1>
       <%= @article.title %>
-      </h1>
+    </h1>
     </p>
   </div>
-    <p>
-        <strong>作成者:</strong>
-      <h4>
-        <%= @article.author.name %>
-      </h4>
-    </p>
-        <strong>アサインユーザ一覧:</strong>
-        <p>
-        <h4>
-          <% @article.assigned_users.each do |assigned_user|%>
-              <%= assigned_user.name%>
-          <%end%>
-        </h4>
-        </p>
-    <p>
-      <strong>詳細:</strong>
-    </p>
-    <p class="lead">
-      <%= @article.message %>
-    </p>
+  <p>
+    <strong>作成者:</strong>
+  <h4>
+    <%= @article.author.name %>
+  </h4>
+  </p>
+  <strong>アサインユーザ一覧:</strong>
+  <p>
+  <h4>
+    <%= @article.assigned_users.pluck(:name).join(",") %>
+  </h4>
+  </p>
 
+  <strong>既読ユーザ一覧:</strong>
+  <p>
+  <h4>
+    <% approval_id=@article.approvals.pluck(:user_id) %>
+    <%= @article.assigned_users.where(id:approval_id).pluck(:name).join(",")%>
+  </h4>
+  </p>
+
+  <strong>未既読ユーザ一覧:</strong>
+  <p>
+  <h4>
+    <%= @article.assigned_users.where.not(id:approval_id).pluck(:name).join(",")%>
+  </h4>
+  </p>
+
+  <p>
+    <strong>詳細:</strong>
+  </p>
+  <p class="lead">
+    <%= @article.message %>
+  </p>
 
   <hr>
   <div class="container">
     <div class="pull-right">
-    <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-default' %> |
-    <%= link_to 'Back', root_path, class:'btn btn-default' %>
+      <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-default' %> |
+      <%= link_to 'Back', root_path, class: 'btn btn-default' %>
     </div>
   </div>
 </div>
