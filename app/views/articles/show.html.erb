@@ -13,8 +13,7 @@
 
   <h4>作者: <%= @article.author.name %></h4>
 
-  <strong>アサインユーザ一覧:</strong>
-  <ul>
+  <ul class="assigns">
     <% @article.assigned_users.map { |u| u.approval(@article) }.each do |approval| %>
         <li>
           <p><%= approval.is_approved ? '既読' : '未読' %></p>

@@ -14,6 +14,10 @@ p, ol, ul, td {
   margin: 33px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
@@ -90,4 +94,13 @@ label {
 
 .user-info {
   padding: 1em 3em;
+}
+
+.assigns {
+  display: flex;
+  li {
+    width: 100px;
+    padding: 10px;
+    border: solid 1px;
+  }
 }
