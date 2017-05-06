@@ -4,6 +4,11 @@ class User < ActiveRecord::Base
   has_many :created_articles, :class_name => 'Article', :foreign_key => :author_id
 
   devise :omniauthable, :omniauth_providers => [:google_oauth2]
+
+  def approval(article)
+    approvals.find_by_article_id(article)
+  end
+
   protected
   def self.from_omniauth(access_token)
     data = access_token.info

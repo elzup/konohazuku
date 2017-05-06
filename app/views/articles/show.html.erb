@@ -14,26 +14,14 @@
   <h4>作者: <%= @article.author.name %></h4>
 
   <strong>アサインユーザ一覧:</strong>
-  <p>
-  <h4>
-    <%= @article.assigned_users.pluck(:name).join(",") %>
-  </h4>
-  </p>
-
-  <strong>既読ユーザ一覧:</strong>
-  <p>
-  <h4>
-    <% approval_id=@article.approvals.pluck(:user_id) %>
-    <%= @article.assigned_users.where(id: approval_id).pluck(:name).join(",") %>
-  </h4>
-  </p>
-
-  <strong>未既読ユーザ一覧:</strong>
-  <p>
-  <h4>
-    <%= @article.assigned_users.where.not(id: approval_id).pluck(:name).join(",") %>
-  </h4>
-  </p>
+  <ul>
+    <% @article.assigned_users.map { |u| u.approval(@article) }.each do |approval| %>
+        <li>
+          <p><%= approval.is_approved ? '既読' : '未読' %></p>
+          <p><%= approval.user.name %></p>
+        </li>
+    <% end %>
+  </ul>
 
   <hr>
   <div class="container">
